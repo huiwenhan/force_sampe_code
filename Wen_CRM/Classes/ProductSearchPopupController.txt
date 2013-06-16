@@ -1,0 +1,40 @@
+public class ProductSearchPopupController{
+
+    List<PricebookEntryWrapper> priceBookEntryWrappers  {get;set;}
+    
+    
+    List<PricebookEntryWrapper> selectedEntries {get;set;}
+    List<PricebookEntry> priceBookEntries {get;set;}
+	public List<PricebookEntryWrapper> getPriceBookEntryWrappers() {
+		if(priceBookEntries == null) 
+        {
+            priceBookEntryWrappers = new List<PricebookEntryWrapper>();
+            for(PricebookEntry entry : [Select id,ProductCode ,unitprice,Product2Id,Product2.Name,Product2.Description,Product2.Family from PriceBookEntry limit 10])
+            {
+                    priceBookEntryWrappers.add(new PricebookEntryWrapper(entry));
+               // ApexPages.addMessage(new ApexPages.message(ApexPages.severity.ERROR, String.Valueof(entry)));
+                	
+			}
+		
+		}
+        ApexPages.addMessage(new ApexPages.message(ApexPages.severity.ERROR, String.Valueof(priceBookEntryWrappers)));
+		return priceBookEntryWrappers;
+	}
+    
+    	public PageReference next() {
+		selectedEntries.clear();	
+		for(PricebookEntryWrapper the : priceBookEntryWrappers) {
+			if(the.selected)
+			selectedEntries.add(new PricebookEntryWrapper(the.pricebookEntry)); 
+		}
+		
+		Integer i = selectedEntries.size();	
+		if(i > 0) {			
+			return Page.OppQuote;
+            //return null;
+		} else {
+			//ApexPages.addMessage(new ApexPages.message(ApexPages.severity.ERROR, 'Please select a Product/Asset.'));
+			return null;
+		}				
+	}
+}

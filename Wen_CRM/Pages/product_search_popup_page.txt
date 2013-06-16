@@ -1,0 +1,36 @@
+<apex:page controller="ProductSearchPopupController" showHeader="true" sidebar="false">
+    <apex:form id="form" >
+		<div style="width 100%">
+		
+                
+			<apex:pageBlock>
+                	
+	            	<apex:pageBlockButtons >
+                	<apex:commandButton action="{!next}" value="Select" />
+            		</apex:pageBlockButtons>
+            		<apex:pageMessages />
+                	
+          		<apex:pageBlockSection >
+              		<apex:pageBlockTable value="{!priceBookEntryWrappers}" var="pitem">
+                         <apex:column >
+                    		<apex:inputCheckbox value="{!pitem.selected}"/>
+                		</apex:column>
+                		
+                        <apex:column headerValue="Product">
+                            <apex:outputText value="{!pitem.pricebookEntry.Product2.Name}"/>
+                        </apex:column>
+                        <apex:column headerValue="Product Code">
+                  			<apex:outputLink value="#">{!pitem.pricebookEntry.ProductCode}</apex:outputLink>       
+                		</apex:column>
+                        <apex:column headerValue="Description">
+                            <apex:outputField value="{!pitem.pricebookEntry.Product2.Description}"/>
+                        </apex:column>
+                        <apex:column headerValue="Price">
+                            <apex:outputField value="{!pitem.pricebookEntry.unitPrice}"/>
+                        </apex:column>
+              		</apex:pageBlockTable>    
+          		</apex:pageBlockSection>
+        	</apex:pageBlock>
+		</div>
+	</apex:form>
+</apex:page>
