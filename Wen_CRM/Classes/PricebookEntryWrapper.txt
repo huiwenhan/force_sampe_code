@@ -1,0 +1,11 @@
+public class PricebookEntryWrapper{
+
+	public ProductLineItem lineItem  {get;set;}
+	public Boolean selected {get;set;}	
+	
+    public PricebookEntryWrapper(ProductLineItem thePricebookEntry) {
+		this.lineItem = thePricebookEntry;
+		this.selected = false;
+	}
+
+}

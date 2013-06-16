@@ -41,51 +41,52 @@ public class ProductSearchPopupController{
 	}
     
     	public PageReference next() {
-		selectedEntries.clear();	
-		for(PricebookEntryWrapper the : priceBookEntryWrappers) {
-			if(the.selected)
-			selectedEntries.add(the.lineItem); 
-		}
+			selectedEntries.clear();	
+			for(PricebookEntryWrapper the : priceBookEntryWrappers) {
+				if(the.selected)
+					selectedEntries.add(the.lineItem); 
+			}
 		
-		Integer i = selectedEntries.size();	
-		if(i > 0) {			
-			return Page.OppQuote;
-            //return null;
-		} else {
-			//ApexPages.addMessage(new ApexPages.message(ApexPages.severity.ERROR, 'Please select a Product/Asset.'));
-			return null;
-		}				
-	}
+			Integer i = selectedEntries.size();	
+			if(i > 0) {			
+				return Page.OppQuote;
+				//return null;
+			} else {
+				//ApexPages.addMessage(new ApexPages.message(ApexPages.severity.ERROR, 'Please select a Product/Asset.'));
+				return null;
+			}				
+		}
     
     	public PageReference Back() {
 			return Page.ProductSearchPopup;
 	}
     
     	public PageReference save() {
-		Integer i = selectedEntries.size();
-        ApexPages.addMessage(new ApexPages.message(ApexPages.severity.ERROR, String.Valueof(selectedEntries)));
-        ApexPages.addMessage(new ApexPages.message(ApexPages.severity.ERROR, String.Valueof(lineItem)));
-            for(ProductLineItem the : selectedEntries) {
-			
-                Wen_Opportunity_Quotes__c  q=  new Wen_Opportunity_Quotes__c(
-                	
-                	List_Price__c = the.listPrice,
-            		Product__c= quote.Product__c,
-            		Product_Code__c= quote.Product_Code__c,
-            		Quantity__c= the.OrderQuantity,
-            		sales_price__c= the.salePrice,
-            		Order_status__c= 'Opened',
-                	Opportunity_id__c=opportunity_id
-                	
-                );
-                
-                insert q;
-			}
-            
-           
-		PageReference home = new PageReference('/' + opportunity.Id);
-		home.setRedirect(true);
-		return home;
+			Integer i = selectedEntries.size();
+			ApexPages.addMessage(new ApexPages.message(ApexPages.severity.ERROR, String.Valueof(selectedEntries)));
+			ApexPages.addMessage(new ApexPages.message(ApexPages.severity.ERROR, String.Valueof(lineItem)));
+				for(ProductLineItem the : selectedEntries) {
+				
+					Wen_Opportunity_Quotes__c  q=  new Wen_Opportunity_Quotes__c(
+						
+						List_Price__c = Decimal.ValueOf(the.listPrice),
+						Product__c= the.ProductId,
+						Product_Code__c= the.productCode,
+						Quantity__c= Decimal.ValueOf(the.OrderQuantity),
+						sales_price__c= Decimal.ValueOf(the.salePrice),
+						Order_status__c= 'Opened',
+						Opportunity__c=ID.ValueOf(opportunity_id)
+						
+					);
+					
+					//insert q;
+				}
+				
+			   
+			//PageReference home = new PageReference('/' + opportunity.Id);
+			//home.setRedirect(true);
+			//return home;
+            return null;
            
 	}
 }
