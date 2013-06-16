@@ -1,17 +1,36 @@
 public class ProductSearchPopupController{
 
+    public Wen_Opportunity__c opportunity;
+    
+    List<Wen_Opportunity_Quotes__c > quotes;
+  
     List<PricebookEntryWrapper> priceBookEntryWrappers  {get;set;}
     
+    public Wen_Opportunity_Quotes__c lineItem {get;set;}
     
-    List<PricebookEntryWrapper> selectedEntries {get;set;}
+    public ProductSearchPopupController() {
+        String opportunity_id = ApexPages.currentPage().getParameters().get('opportunity_id');
+    	//opportunity = [SELECT Id,Name FROM Wen_Opportunity__c WHERE Id = :opportunity_id];
+  		this.lineItem = new Wen_Opportunity_Quotes__c();
+  	}
+    public List<ProductLineItem> selectedEntries 
+    {
+        get {
+			if(selectedEntries == null) selectedEntries = new List<ProductLineItem>();
+			return selectedEntries;
+		}
+        set;
+    }
+                                          
+                                          
     List<PricebookEntry> priceBookEntries {get;set;}
 	public List<PricebookEntryWrapper> getPriceBookEntryWrappers() {
 		if(priceBookEntries == null) 
         {
             priceBookEntryWrappers = new List<PricebookEntryWrapper>();
-            for(PricebookEntry entry : [Select id,ProductCode ,unitprice,Product2Id,Product2.Name,Product2.Description,Product2.Family from PriceBookEntry limit 10])
+            for(PricebookEntry entry : [Select id,Name,ProductCode ,unitprice,Product2Id,Product2.Name,Product2.Description,Product2.Family from PriceBookEntry limit 10])
             {
-                    priceBookEntryWrappers.add(new PricebookEntryWrapper(entry));
+                priceBookEntryWrappers.add(new PricebookEntryWrapper(new ProductLineItem(entry)));
                // ApexPages.addMessage(new ApexPages.message(ApexPages.severity.ERROR, String.Valueof(entry)));
                 	
 			}
@@ -25,7 +44,7 @@ public class ProductSearchPopupController{
 		selectedEntries.clear();	
 		for(PricebookEntryWrapper the : priceBookEntryWrappers) {
 			if(the.selected)
-			selectedEntries.add(new PricebookEntryWrapper(the.pricebookEntry)); 
+			selectedEntries.add(the.lineItem); 
 		}
 		
 		Integer i = selectedEntries.size();	
@@ -36,5 +55,37 @@ public class ProductSearchPopupController{
 			//ApexPages.addMessage(new ApexPages.message(ApexPages.severity.ERROR, 'Please select a Product/Asset.'));
 			return null;
 		}				
+	}
+    
+    	public PageReference Back() {
+			return Page.ProductSearchPopup;
+	}
+    
+    	public PageReference save() {
+		Integer i = selectedEntries.size();
+        ApexPages.addMessage(new ApexPages.message(ApexPages.severity.ERROR, String.Valueof(selectedEntries)));
+        ApexPages.addMessage(new ApexPages.message(ApexPages.severity.ERROR, String.Valueof(lineItem)));
+            for(ProductLineItem the : selectedEntries) {
+			
+                Wen_Opportunity_Quotes__c  q=  new Wen_Opportunity_Quotes__c(
+                	
+                	List_Price__c = the.listPrice,
+            		Product__c= quote.Product__c,
+            		Product_Code__c= quote.Product_Code__c,
+            		Quantity__c= the.OrderQuantity,
+            		sales_price__c= the.salePrice,
+            		Order_status__c= 'Opened',
+                	Opportunity_id__c=opportunity_id
+                	
+                );
+                
+                insert q;
+			}
+            
+           
+		PageReference home = new PageReference('/' + opportunity.Id);
+		home.setRedirect(true);
+		return home;
+           
 	}
 }
