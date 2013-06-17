@@ -16,6 +16,11 @@
                 <apex:column headerValue="Product Code" value="{!pitem.productCode}">
                      
                 </apex:column>
+                
+                <apex:column headerValue="Opportunity" value="{!pitem.opportunityId}">
+                     
+                </apex:column>
+                
                 <apex:column headerValue="quality">
                     <apex:inputText value="{!pitem.orderQuantity}"/>
                 </apex:column>

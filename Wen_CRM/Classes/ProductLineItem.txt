@@ -5,10 +5,11 @@ public class ProductLineItem{
     public String productDesc {get ;set;}
     public String productName {get ;set;}
     public Id productId {get;set;}
-    public String opportunityId {get;set ;}
+    public Id opportunityId {get;set ;}
     public double listPrice {get;set;}
     public double salesPrice {get;set;}
-    public Decimal orderQuantity {get;set;}
+    public Integer orderQuantity {get;set;}
+    
     
     public ProductLineItem()
     {

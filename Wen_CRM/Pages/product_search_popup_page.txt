@@ -3,7 +3,7 @@
 		<div style="width 100%">
 		
                 
-			<apex:pageBlock>
+			<apex:pageBlock >
                 	
 	            	<apex:pageBlockButtons >
                 	<apex:commandButton action="{!next}" value="Select" />
@@ -15,19 +15,41 @@
                          <apex:column >
                     		<apex:inputCheckbox value="{!pitem.selected}"/>
                 		</apex:column>
-                		
+                		<!--
                         <apex:column headerValue="Product">
-                            <apex:outputText value="{!pitem.pricebookEntry.Product2.Name}"/>
+                            <apex:outputText value="{!pitem.lineItem.productName}"/>
                         </apex:column>
                         <apex:column headerValue="Product Code">
-                  			<apex:outputLink value="#">{!pitem.pricebookEntry.ProductCode}</apex:outputLink>       
+                  			<apex:outputLink value="#">{!pitem.lineItem.productCode}</apex:outputLink>       
                 		</apex:column>
+                        
                         <apex:column headerValue="Description">
-                            <apex:outputField value="{!pitem.pricebookEntry.Product2.Description}"/>
+                            <apex:outputField value="{!pitem.lineItem.productDesc}"/>
                         </apex:column>
+                        
                         <apex:column headerValue="Price">
-                            <apex:outputField value="{!pitem.pricebookEntry.unitPrice}"/>
+                            <apex:outputField value="{!pitem.lineItem.unitPrice}"/>
                         </apex:column>
+                        -->
+                        <apex:column headerValue="Product" value="{!pitem.lineItem.productName}">
+                           
+                        </apex:column>
+                        <apex:column headerValue="Product Code">
+                  			<apex:outputLink value="#">{!pitem.lineItem.productCode}</apex:outputLink>       
+                		</apex:column>
+                        
+                        <apex:column headerValue="Description" value="{!pitem.lineItem.productDesc}">
+                            
+                        </apex:column>
+                        
+                        <apex:column headerValue="List Price" value="{!pitem.lineItem.listPrice}">
+                         
+                        </apex:column>
+                        
+                        <apex:column >
+							<apex:inputHidden value="{!pitem.lineItem.productId}" />
+						</apex:column>
+                        
               		</apex:pageBlockTable>    
           		</apex:pageBlockSection>
         	</apex:pageBlock>

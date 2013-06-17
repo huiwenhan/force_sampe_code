@@ -7,10 +7,10 @@ public class ProductSearchPopupController{
     List<PricebookEntryWrapper> priceBookEntryWrappers  {get;set;}
     
     public Wen_Opportunity_Quotes__c lineItem {get;set;}
-    
+    String opportunity_id;
     public ProductSearchPopupController() {
-        String opportunity_id = ApexPages.currentPage().getParameters().get('opportunity_id');
-    	//opportunity = [SELECT Id,Name FROM Wen_Opportunity__c WHERE Id = :opportunity_id];
+        opportunity_id = ApexPages.currentPage().getParameters().get('opportunity_id');
+    	
   		this.lineItem = new Wen_Opportunity_Quotes__c();
   	}
     public List<ProductLineItem> selectedEntries 
@@ -44,7 +44,10 @@ public class ProductSearchPopupController{
 			selectedEntries.clear();	
 			for(PricebookEntryWrapper the : priceBookEntryWrappers) {
 				if(the.selected)
+                {
+                    the.lineItem.opportunityId = ID.valueof(opportunity_id);
 					selectedEntries.add(the.lineItem); 
+                }
 			}
 		
 			Integer i = selectedEntries.size();	
@@ -69,24 +72,23 @@ public class ProductSearchPopupController{
 				
 					Wen_Opportunity_Quotes__c  q=  new Wen_Opportunity_Quotes__c(
 						
-						List_Price__c = Decimal.ValueOf(the.listPrice),
+						List_Price__c = Decimal.valueof(the.listPrice),
 						Product__c= the.ProductId,
 						Product_Code__c= the.productCode,
-						Quantity__c= Decimal.ValueOf(the.OrderQuantity),
-						sales_price__c= Decimal.ValueOf(the.salePrice),
-						Order_status__c= 'Opened',
-						Opportunity__c=ID.ValueOf(opportunity_id)
-						
+						Quantity__c= Decimal.valueof(the.orderQuantity),
+						sales_price__c= Decimal.valueof(the.salesPrice),
+						Quote_status__c= 'Opened',
+						Opportunity__c=the.opportunityId	
 					);
 					
-					//insert q;
+					insert q;
 				}
 				
 			   
-			//PageReference home = new PageReference('/' + opportunity.Id);
-			//home.setRedirect(true);
-			//return home;
-            return null;
+			PageReference home = new PageReference('/' + opportunity_id);
+			home.setRedirect(true);
+			return home;
+           
            
 	}
 }

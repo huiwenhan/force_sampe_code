@@ -1,0 +1,36 @@
+Edit | Del	Prospecting		Assigned dynamically	Han HuiWen, 2013-6-15 PM3:49
+Edit | Del	Qualification		Assigned dynamically	Han HuiWen, 2013-6-15 PM3:49
+Edit | Del	Need Analysis		Assigned dynamically	Han HuiWen, 2013-6-15 PM3:49
+Edit | Del	Value Proposition		Assigned dynamically	Han HuiWen, 2013-6-15 PM3:49
+Edit | Del	Id. Decision Makers		Assigned dynamically	Han HuiWen, 2013-6-15 PM3:49
+Edit | Del	Perception Analysis		Assigned dynamically	Han HuiWen, 2013-6-15 PM3:49
+Edit | Del	Proposal /Price Quote		Assigned dynamically	Han HuiWen, 2013-6-15 PM3:49
+Edit | Del	Negotiation /Review		Assigned dynamically	Han HuiWen, 2013-6-15 PM3:49
+Edit | Del	Close Won		Assigned dynamically	Han HuiWen, 2013-6-15 PM3:49
+Edit | Del	Close Lost
+
+
+
+Edit | Del	Opened		Assigned dynamically	Han HuiWen, 2013-6-15 PM4:44
+Edit | Del	Confirmed		Assigned dynamically	Han HuiWen, 2013-6-15 PM4:44
+Edit | Del	Shipped		Assigned dynamically	Han HuiWen, 2013-6-15 PM4:44
+Edit | Del	Customer Received		Assigned dynamically	Han HuiWen, 2013-6-16 PM11:47
+Edit | Del	Closed
+
+
+Edit | Del	Opened		Assigned dynamically	Han HuiWen, 2013-6-15 PM4:19
+Edit | Del	Confirmed		Assigned dynamically	Han HuiWen, 2013-6-15 PM4:19
+Edit | Del	Sent to Customer		Assigned dynamically	Han HuiWen, 2013-6-15 PM4:19
+Edit | Del	Customer Rejected		Assigned dynamically	Han HuiWen, 2013-6-15 PM4:19
+Edit | Del	Customer Accepted		Assigned dynamically	Han HuiWen, 2013-6-15 PM4:19
+Edit | Del	Manager Rejected		Assigned dynamically	Han HuiWen, 2013-6-16 PM11:46
+Edit | Del	Manager Approve		Assigned dynamically	Han HuiWen, 2013-6-16 PM11:46
+Edit | Del	Convert to Sales Order
+
+
+Edit | Del	Opened		Assigned dynamically	Han HuiWen, 2013-6-15 PM4:50
+Edit | Del	Confirmed		Assigned dynamically	Han HuiWen, 2013-6-15 PM4:50
+Edit | Del	Packaged		Assigned dynamically	Han HuiWen, 2013-6-15 PM4:50
+Edit | Del	Shipped		Assigned dynamically	Han HuiWen, 2013-6-15 PM4:50
+Edit | Del	Customer Received		Assigned dynamically	Han HuiWen, 2013-6-16 PM10:51
+Edit | Del	Order Closed
