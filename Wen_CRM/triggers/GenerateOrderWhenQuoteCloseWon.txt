@@ -1,7 +1,6 @@
-trigger GenerateOrderWhenQuoteCloseWon on Wen_Opportunity_Quotes__c (after update) {
-
+trigger GenerateOrderWhenQuoteConvert on Wen_Opportunity_Quotes__c (after update) {
    for (Wen_Opportunity_Quotes__c quote : Trigger.new) {
-		if(quote.Quote_Status__c == 'Convert to Sales Order')
+        if(quote.Quote_Status__c == 'Convert to Sales Order')
         {
              Decimal discount ;
              if(quote.Quantity__c <10)
@@ -20,23 +19,24 @@ trigger GenerateOrderWhenQuoteCloseWon on Wen_Opportunity_Quotes__c (after updat
             
             Wen_Opportunity_Sales_Orders__c a=
             new Wen_Opportunity_Sales_Orders__c
-            	(List_Price__c = quote.List_Price__c,
-            	Product__c= quote.Product__c,
-            	Product_Code__c= quote.Product_Code__c,
-            	Quantity__c= quote.Quantity__c,
-            	sales_price__c= quote.sales_price__c,
-            	Order_status__c= 'Opened',
+                (List_Price__c = quote.List_Price__c,
+                Product__c= quote.Product__c,
+                Product_Code__c= quote.Product_Code__c,
+                Quantity__c= quote.Quantity__c,
+                sales_price__c= quote.sales_price__c,
+                Order_status__c= 'Opened',
                 Opportunity_id__c=quote.Opportunity__c,
                 Discount__c =discount*100,
-                discount_price__c = discount_price
-				)	;
+                discount_price__c = discount_price,
+                Quote_id__c = quote.Id
+                )   ;
             
-            	insert a;
+                insert a;
                 
         }
         else
         {
             System.debug(String.valueof(quote.Name) +'updated,status:'+quote.Quote_Status__c);
         }
-	}
+    }
 }
